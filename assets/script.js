@@ -16,11 +16,7 @@ let wind = $("wind");
 
 
 
-$(document).ready(function(){
-  var today = dayjs();
-  $("#current-day").text(today.format("dddd MMMM YYYY"));
-  
-  });
+
 
   function saveCity (cityInput) {
     var inputSaved = JSON.parse(localStorage.getItem("searchBtn")) || [];
@@ -69,6 +65,41 @@ $(document).ready(function(){
 
    }
 function showCurrent(cityName, data) {
-  $("current-city")
-}
+  $("current-day").innerHTML = dayjs().format("dddd MMMM YYYY");
+  $("weather").innerHTML = data.weather[0].description;
+  $("current-city").innerHTML = cityName;
+  $("tempature").innerHTML = Math.round(data.main.temp) + "F";
+  $("humidity").innerHTML = data.main.humidity + "%";
+  $("wind").innerHTML = Math.round(data.wind.speed) + "mph";
+
+  }
+
+  function FiveWeather(data) {
+    // Grabs UVI info from 5-day forecast API
+    let currentUVI = ($("UVIindex").innerHTML = Math.round(data.current.uvi));
+
+    // Set loop for 5-day weather
+    $("5-day-section").innerHTML = "";
+    for (var i = 0; i < 5; i++) {
+      let forecastDates = dayjs()
+        .add(i + 1, "days")
+        .format("ddd MM/DD/YYYY");
+      // Build HTML from js for 5-day forecast
+      let day = $("div");
+      day.innerHTML = [
+        `<h5>${forecastDates}</h5>
+      <img src="https://openweathermap.org/img/wn/${
+        data.daily[i].weather[0].icon
+      }@2x.png">
+      <p>${data.daily[i].weather[0].description}</p>
+      <p>Temperature: ${Math.round(data.daily[i].temp.day)}°F</p>
+      <p>Humidity: ${data.daily[i].humidity}%</p>`,
+      ];
+      document.querySelector("5-day-section").appendChild(day);
+    }
+    uviBadge(data);
+    $("#card-text").empty();
+  }
+
+
 
