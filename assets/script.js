@@ -3,7 +3,6 @@ let lat = "";
 let lon = "";
 let currentCity =$("current-city");
 const apiKey= "0add977b895357f4ff61a3e93333b72d";
-
 const searchCity = $("searchCity");
 let searchBtn = $("searchBtn");
 let tomorrow = dayjs().day(0);
@@ -15,6 +14,16 @@ let weather = $("weather");
 let wind = $("wind");
 
 
+
+  $(searchBtn).on("submit",function(event) {
+    event.preventDefault();
+    let cityInput = $("searchCity").val();
+
+    getWeather (cityInput);
+    saveCity (cityInput);
+    renderSave();
+  
+});
 
 
 
