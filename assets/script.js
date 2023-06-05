@@ -68,18 +68,18 @@ let wind = $("wind");
     })
     .then(function(fiveDayData){
       console.log(fiveDayData);
-      showFiveWeather(fiveDayData);
+      FiveWeather(fiveDayData);
     });
 });
 
    }
 function showCurrent(cityName, data) {
-  $("current-day").innerHTML = dayjs().format("dddd MMMM YYYY");
-  $("weather").innerHTML = data.weather[0].description;
-  $("current-city").innerHTML = cityName;
-  $("tempature").innerHTML = Math.round(data.main.temp) + "F";
-  $("humidity").innerHTML = data.main.humidity + "%";
-  $("wind").innerHTML = Math.round(data.wind.speed) + "mph";
+  $("current-day").html() = dayjs().format("dddd MMMM YYYY");
+  $("weather").html() = data.weather[0].description;
+  $("current-city").html() = cityName;
+  $("tempature").html() = Math.round(data.main.temp) + "°F";
+  $("humidity").html() = data.main.humidity + "%";
+  $("wind").html() = Math.round(data.wind.speed) + "mph";
 
   }
 
@@ -88,14 +88,14 @@ function showCurrent(cityName, data) {
     let currentUVI = ($("UVIindex").innerHTML = Math.round(data.current.uvi));
 
     // Set loop for 5-day weather
-    $("5-day-section").innerHTML = "";
+    $("5-day-section").html() = "";
     for (var i = 0; i < 5; i++) {
       let forecastDates = dayjs()
         .add(i + 1, "days")
         .format("ddd MM/DD/YYYY");
       // Build HTML from js for 5-day forecast
       let day = $("div");
-      day.innerHTML = [
+      day.html() = [
         `<h5>${forecastDates}</h5>
       <img src="https://openweathermap.org/img/wn/${
         data.daily[i].weather[0].icon
