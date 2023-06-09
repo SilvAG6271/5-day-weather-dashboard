@@ -1,114 +1,143 @@
-let city = $("searchCity").val();
+let city = "";
 let lat = "";
 let lon = "";
 let currentCity =$("current-city");
-const apiKey= "0add977b895357f4ff61a3e93333b72d";
-const searchCity = $("searchCity");
-let searchBtn = $("searchBtn");
+let apiKey= "665c55f6299334252a52c0dc5a8d9a64";
+let weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + "&units=imperial";
+let searchCity = $("#search-city").val();
+let searchBtn = $("#search-btn");
 let tomorrow = dayjs().day(0);
 let future = $("5-day");
-let temp = $("temp");
+let temp = $("tempature");
 let humidity = $("humidity");
 let uvIndex = $("uvIndex");
 let weather = $("weather");
 let wind = $("wind");
+let historyForm = $("history-form");
+let sCity = [];
 
-
-
-  $(searchBtn).on("submit",function(event) {
-    event.preventDefault();
-    let cityInput = $("searchCity").val();
-
-    getWeather (cityInput);
-    saveCity (cityInput);
-    renderSave();
-  
-});
-
-
-
-  function saveCity (cityInput) {
-    var inputSaved = JSON.parse(localStorage.getItem("searchBtn")) || [];
-    inputSaved.push(cityInput);
-    localStorage.setItem("searchBtn", JSON.stringify(inputSaved));
-  }
-
-  function renderSave(){
-    let inputSaved = JSON.parse(localStorage.getItem(searchBtn)) || [];
-
-    $("history").innerHTML = "";
-    inputSaved.forEach(function(searchedCity){
-      let cityHistoryBtn = $("history").append("button");
-      cityHistoryBtn.innerHTML = searchedCity
-    
-    })
-
-
-  }
-   function getWeather (cityName) {
-    let weatherURL = "api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}"; 
-   
-
-  fetch(weatherURL, {
-  method: 'GET', 
-  credentials: 'include',
-})
-
-.then(function (response) {
-  return response.json();
-})
-.then(function (data) {
-  console.assert.log(data);
-  showCurrent(cityName, data);
-
-  let fiveDayURL = "api.openweathermap.org/data/2.5/necall?lat=${data.coord.lat}&lon=${data.coord.lon}&units=imperial&appid=${apiKey}";
-  fetch(fiveDayURL)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function(fiveDayData){
-      console.log(fiveDayData);
-      FiveWeather(fiveDayData);
-    });
-});
-
-   }
-function showCurrent(cityName, data) {
-  $("current-day").html() = dayjs().format("dddd MMMM YYYY");
-  $("weather").html() = data.weather[0].description;
-  $("current-city").html() = cityName;
-  $("tempature").html() = Math.round(data.main.temp) + "°F";
-  $("humidity").html() = data.main.humidity + "%";
-  $("wind").html() = Math.round(data.wind.speed) + "mph";
-
-  }
-
-  function FiveWeather(data) {
-    // Grabs UVI info from 5-day forecast API
-    let currentUVI = ($("UVIindex").innerHTML = Math.round(data.current.uvi));
-
-    // Set loop for 5-day weather
-    $("5-day-section").html() = "";
-    for (var i = 0; i < 5; i++) {
-      let forecastDates = dayjs()
-        .add(i + 1, "days")
-        .format("ddd MM/DD/YYYY");
-      // Build HTML from js for 5-day forecast
-      let day = $("div");
-      day.html() = [
-        `<h5>${forecastDates}</h5>
-      <img src="https://openweathermap.org/img/wn/${
-        data.daily[i].weather[0].icon
-      }@2x.png">
-      <p>${data.daily[i].weather[0].description}</p>
-      <p>Temperature: ${Math.round(data.daily[i].temp.day)}°F</p>
-      <p>Humidity: ${data.daily[i].humidity}%</p>`,
-      ];
-      document.querySelector("5-day-section").appendChild(day);
+ function find(c) {
+    for (var i; i<SCity.length;i++){
+        if(c.toUpperCase()===sCity[i]){
+            return -1;
+        }
     }
-    uviBadge(data);
-    $("#card-text").empty();
-  }
+    return 1;
+ }
+
+ function currentWeather(event){
+    event.preventDefault();
+    if (searchCity.val().trim!==""){
+        city=searchCity.val().trim();
+        dsiplayWeather(city);
+    }
+
+ }
+
+ fetch(weatherURL, {
+    //credentials: "include",
+ })
+ .then(function (response){
+    return response.json();
+
+   
+})
+
+.then(function(data){
+    console.log(data);
+ //   let icon = data.weather[0].icon;
+//let iconUrl = "https://openweathermap.org/img/wn/"+ icon +"@2x.png";
+let date = new Date (data.dt*1000).toLocalDateString();
+$(currentCity).html(data.name + "("+date+")");
+$(temp).html.toFixed(2);
+$(humidity).html(data.main.humidity+"%");
+let windS = data.wind.speed;
+let windMPH = (windS*2.237).toFixed(1);
+$(wind).html(windMPH + "MPH");
+uvIndexCoords(data.coord.lon, data.coord.lat);
+forecast(data.id);
+if (data.code === 200) {
+    sCity=JSON.parse(localStorage.getItem("cityname"));
+    console.log(sCity);
+    if (sCity===null){
+        sCity=[];
+        sCity.push(city.toUpperCase()
+);
+localStorage.setItem("cityname", JSON.stringify(sCity));
+addCity(city);
+    }
+
+}
+
+});
+
+function uvI(){
+
+    var uvURL = "https://api.openweathermap.org/data/2.5/uvi?appid="+ apiKey+"&lat="+lt+"&lon="+ln;
+fetch(uvURL)
+.then(function(response){
+    return response.json
+    
+})
+$(uvIndex).html(response.value);
+}
+
+function fiveDay(cityid){
+    let dayOver = false;
+    var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?id="+ cityid +"&appid=" + apiKey;
+    fetch(fiveDay)
+.then(function(response){
+    return response.json
+    
+
+.then (function(data){
+console.log(data);
+
+for (i=0;i<5;i++){
+let date = new Date(data.list[((i+1)*8)-1].dt)*1000).toLocalDateString();
+let iconurl="https://openweathermap.org/img/wn/"+iconcode+".png";
+let tempK= response.list[((i+1)*8)-1].main.temp;
+
+let humidity= response.list[((i+1)*8)-1].main.humidity;
+
+$("#fDate"+i).html(date);
+$("#fImg"+i).html("<img src="+iconurl+">");
+$("#fTemp"+i).html(tempF+"&#8457");
+$("#fHumidity"+i).html(humidity+"%");
+
+}
+});
+
+function addList(c){
+    let listEl = $("<li>" + c.toUpperCase()+"<li>");
+    $(listEl).attr("class", "list-city");
+    $(listEl).attr("data-value", c.toUpperCase());
+    $(".city-list"),append(listEl);
 
 
+}
 
+function pastSearch(){
+    let lineEl = event.target;
+    if (event.target.matches("li")){
+        city=lineEl.textContent.trim();
+        dsiplayWeather(city);
+    }
+}
+
+function lastCity(){
+    $(ul).empty();
+    let sCity = JSON.parse(localStorage.getItem("cityname"));
+    if (sCity!==null){
+        sCity=JSON.parse(localStorage.getItem("cityname"));
+        for (i=0;i<sCity.length;i++){
+            addList(sCity[i]);
+        }
+        city=sCity[i-1];
+        dsiplayWeather(city);
+    }
+}
+
+$("search-btn").on("click",currentWeather);
+$(document).on("click", pastSearch);
+$(window).on("load", lastCity);
