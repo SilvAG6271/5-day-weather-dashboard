@@ -18,15 +18,17 @@
     <div class="flex-column w-1/6 h-screen bg-zinc-100">
                 
         <div class="relative px-5 sm:max-w-l sm:max-auto">
-            <label class = "block font-semibold">Search for City</label>
-            <input id="searchCity" type="text" placeholder="City Name" class="input-append border w-1/2 h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-1 focus:ring-rose-700 rounded-md">
+            <form>
+            <label class ="block font-semibold">Search for City</label>
+            <input id="search-city" type="text" placeholder="City Name" class="input-append border w-1/2 h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-1 focus:ring-rose-700 rounded-md">
             <div class="flex-justify-between items-baseline">
-            <button id="searchBtn" type="submit" class="mt-2 bg-indigo-600 text-white py-0 px-20 rounded-sm hover:" >Search
+            <button id="search-btn" type="submit" class="mt-2 bg-indigo-600 text-white py-0 px-20 rounded-sm hover:" >Search
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="currentColor" className="w-1 h-1">
                     <path d="M6.75 8.25a.75.75 0 000 1.5h4.5a.75.75 0 000-1.5h-4.5z" />
                     <path fillRule="evenodd" d="M9 2a7 7 0 104.391 12.452l3.329 3.328a.75.75 0 101.06-1.06l-3.328-3.329A7 7 0 009 2zM3.5 9a5.5 5.5 0 1111 0 5.5 5.5 0 01-11 0z" clipRule="evenodd" />
                   </svg>
             </button>
+        </form>
             </div>
         </div>
             
@@ -50,17 +52,45 @@
     <div id="5-day-section" class="flex-row p-10 bg-orange-300">
         <h3 id="5-day">5 Day Forecast</h3>
     </div>
+    <div class="" >
+        <p id="future-Date0"></p>
+        <p id="future-Img0"></p>
+        <p>Temp:<span id="future-Temp0"></span></p>
+        <p>Humidity:<span id="future-Humidity0"></span></p>
+    </div>
+    <div class="" >
+            <p id="future-Date1"></p>
+            <p id="future-Img1"></p>
+            <p>Temp:<span id="future-Temp1"></span></p>
+            <p>Humidity:<span id="future-Humidity1"></span></p>
+    </div>
+    <div class="" >
+                <p id="future-Date2"></p>
+                <p id="future-Img2"></p>
+                <p>Temp:<span id="future-Temp2"></span></p>
+                <p>Humidity:<span id="future-Humidity2"></span></p>
+    </div>
+            <div class="" >
+                <p id="future-Date3"></p>
+                <p id="future-Img3"></p>
+                <p>Temp:<span id="future-Temp3"></span></p>
+                <p>Humidity:<span id="future-Humidity4"></span></p>
+    </div>
+    <div class="" >
+                <p id="future-Date4"></p>
+                <p id="future-Img4"></p>
+                <p>Temp:<span id="future-Temp4"></span></p>
+                <p>Humidity:<span id="future-Humidity4"></span></p>
+    </div>
 </div>
 </div>
     
     
     </main>
-    <script
-      src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
-      integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="assets\script.js"></script>
+
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="assets/script.js"></script>
 </body>
 </html>
+
+
