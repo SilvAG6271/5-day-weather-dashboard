@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Document</title>
@@ -40,10 +39,10 @@
     </div>
     <div id="current-day" class="flex-row">
      <div id="current-city" class="current-city">
-     <div id="currentIcon"></div>
+     <div id="current-icon"></div>
      <p>Weather Conditions: <span id="weather"></span></p>
-     <p>Tempature: <span id="tempature"></span></p>
-     <p>Humidity: <span id="humidity"></span></p>
+     <p>Tempature: <span id="current-tempature"></span></p>
+     <p>Humidity: <span id="current-humidity"></span></p>
      <p>Wind:<span id="wind"></span></p>
      <p>Uv Index:<span id="uvIndex"></span></p>
      </div>
@@ -87,7 +86,7 @@
     
     
     </main>
-
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="assets/script.js"></script>
 </body>
