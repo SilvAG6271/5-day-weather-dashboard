@@ -4,13 +4,15 @@ const apiKey= "665c55f6299334252a52c0dc5a8d9a64";
 const date = dayjs();
 let searchBtn = $("#search-btn");
 let future = $("#5-day-section");
-let temp = $("#current-tempature");
-let humidity = $("#current-humidity");
+let temp = "";
+let humidity = "";
 let uvIndex = $("#uvIndex");
 let weather = $("#weather");
-let wind = $("#wind");
+let wind = "";
 let cityLocation = [];
-icon = "";
+let icon = "";
+let city = "";
+
 
 function getWeather(){
     let currentUrl = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid="+apiKey+ "&units=imperial";
@@ -24,31 +26,32 @@ function getWeather(){
         wind = data.wind.speed;
         humidity = data.main.humidity;
 
-
+        displayCurrent();
+        displayForecast();
     })
 
-    .then(function(data) {
-        displayCurrent()
-        displayForecast()
-    })
-}
+
+    }
+
+    
 
 function displayCurrent(){
-    let currentDate = today.format (mm, dd, yyyy);
-    $("current-city").text(city + "," + currentDate);
-    $("current-icon").attr("https://openweathermap.org/img/wn/' + ico + '@2x.png");
-    $("current-tempature").text(temp);
-    $("current-humidity").text(humidity + "%");
+    let currentDate = date.format("MM, DD, YYYY");
+    $("#current-city").text(city + "," + currentDate);
+    $("#current-icon").attr("src","https://openweathermap.org/img/wn/" + icon + "@2x.png");
+    $("#current-tempature").text(temp);
+    $("#current-humidity").text(humidity + "%");
 }
 
 
 function addCity(){
     let newCity = JSON.parse(window.localStorage.getItem("city name"));
 
-    $(".city-list").empty();
+    $("#city-list").empty();
     for (i in newCity) {
         let cityButton = "";
         cityButton += "<button id='" + newCity[i].city + 'class="btn">' + newCity[i].city + "</button>";
+        $("#city-list").append(cityButton);
     }
 }
 
@@ -61,21 +64,21 @@ function displayForecast(){
     })
     .then (function(data){
       let index = 1;
-      for (i=0; i< data.list.length; i+=8) {
-        let futureDate = today.add(index, "d").format("mm, dd, yyyy");
-        $("future-date").text(futureDate);
-        $("future-img").attr("src", "https://openweathermap.org/img/wn/' + data.list[i].weather[0].icon + '@2x.png");
-        $("future-tempature").text(data.list[i].main.temp);
-        $("future-wind").text(data.list[i].wind.speed);
-        $("future-humidity").text(data.list[i].main.humidity);
+      for (i=0; i < data.list.length; i+=8) {
+        let futureDate = today.add(index, "d").format("MM, DD, YYYY");
+        $("#future-Date" + index).text(futureDate);
+        $("#future-Img" + index).attr("src", "https://openweathermap.org/img/wn/" + data.list[i].weather[0].icon + "@2x.png");
+        $("#future-Temp" + index).text(data.list[i].main.temp);
+        $("#future-wind" + index).text(data.list[i].wind.speed);
+        $("#future-Humidity" + index).text(data.list[i].main.humidity);
         index++;
-}
-})
+    }
+  })
 }
 
     function citySearch(){
     city = searchCity.val();
-    if (city!==""){
+    if (city!=="") {
         city = city.charAt(0).toUpperCase() + city.slice(1);
         let newCity = {
             city: city,
