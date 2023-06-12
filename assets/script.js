@@ -56,7 +56,7 @@ function addCity(){
 }
 
 function displayForecast(){
-    let forecastURL = "https//api.openweathermap.org/data/2.5/forecast?q="+city+"&appid="+apiKey+"&units=imperial";
+    let forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q="+city+"&appid="+apiKey+"&units=imperial";
     fetch(forecastURL)
     .then (function(response){
         return response.json();
@@ -65,7 +65,7 @@ function displayForecast(){
     .then (function(data){
       let index = 1;
       for (i=0; i < data.list.length; i+=8) {
-        let futureDate = today.add(index, "d").format("MM, DD, YYYY");
+        let futureDate = date.add(index, "d").format("MM, DD, YYYY");
         $("#future-Date" + index).text(futureDate);
         $("#future-Img" + index).attr("src", "https://openweathermap.org/img/wn/" + data.list[i].weather[0].icon + "@2x.png");
         $("#future-Temp" + index).text(data.list[i].main.temp);
