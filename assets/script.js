@@ -23,11 +23,12 @@ function getWeather(){
         curWind = data.wind.speed;
         curHumidity = data.main.humidity;
 
+        displayCurrent();
+        displayForecast();
         
     })
 
-    displayCurrent();
-    displayForecast();
+    
 
     }
 
@@ -37,7 +38,7 @@ function displayCurrent(){
     let currentDate = date.format("MM, DD, YYYY");
     $("#current-city").text(city + ":" + currentDate);
     $("#current-icon").attr("src", "https://openweathermap.org/img/wn/" + wIcon+ "@2x.png");
-    $("#current-temperature").text(curTemp);
+    $("#current-temperature").text(curTemp + "°F");
     $("#current-wind").text(curWind + "MPH");
     $("#current-humidity").text(curHumidity + "%");
 }
@@ -49,7 +50,7 @@ function addCity(){
     $("#city-list").empty();
     for (i in newCity) {
         let cityButton = "";
-        cityButton += "<button id='" + newCity[i].city + 'class="btn">' + newCity[i].city + "</button>";
+        cityButton += '<button id="' + newCity[i].city + '" class="btn btn-info my-1 p-2 text-dark btn-outline-dark d-md-block">' + newCity[i].city + '</button>';
         $("#city-list").append(cityButton);
     }
 }
@@ -67,7 +68,7 @@ function displayForecast(){
         let futureDate = date.add(index, "d").format("MM, DD, YYYY");
         $("#future-Date" + index).text(futureDate);
         $("#future-Img" + index).attr("src", "https://openweathermap.org/img/wn/" + data.list[i].weather[0].icon + "@2x.png");
-        $("#future-Temp" + index).text(data.list[i].main.temp);
+        $("#future-Temp" + index).text(data.list[i].main.temp + "°F");
         $("#future-wind" + index).text(data.list[i].wind.speed + "MPH");
         $("#future-Humidity" + index).text(data.list[i].main.humidity + "%");
         index++;
@@ -92,10 +93,9 @@ function displayForecast(){
 
  searchBtn.click(citySearch);
 
- $("city-list").on("click", function(event) {
+ $("#city-list").on("click", function(event) {
     let cityId= $(event.target).attr("id");
-    let tempatureArr= cityId.split("-");
-    city = tempatureArr[0];
+    city = cityId;
     getWeather();
 
  });
