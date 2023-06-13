@@ -13,11 +13,11 @@ Just go to https://silvag6271.github.io/5-day-weather-dashboard/ and start using
 ## Usage
 Helps to know what the weather will be like for today and up to 5 days in the coming week.
 
-![Photo of portfolio page for Aaron Garcia]()
+![Photo of portfolio page for Aaron Garcia](https://github.com/SilvAG6271/5-day-weather-dashboard/blob/main/assets/Weather%20Dashboard.jpeg)
 
 ## Credit
 
-Special thanks to Eric Beverly for help with code and debugging. His github can be found athttps://github.com/esbev/weather-outlook.
+Special thanks to Eric Beverly for help with code and debugging. His github can be found at https://github.com/esbev/weather-outlook.
 
 ## License
 
