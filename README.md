@@ -17,7 +17,7 @@ Helps to know what the weather will be like for today and up to 5 days in the co
 
 ## Credit
 
-Special thanks to Eric Beverly for help with code and debugging. His github can be found athttps://github.com/esbev/weather-outlook.
+Special thanks to Eric Beverly for help with code and debugging. His github can be found at https://github.com/esbev/weather-outlook.
 
 ## License
 
