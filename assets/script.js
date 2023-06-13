@@ -50,7 +50,7 @@ function addCity(){
     $("#city-list").empty();
     for (i in newCity) {
         let cityButton = "";
-        cityButton += '<button id="' + newCity[i].city + '" class="btn btn-info my-1 p-2 text-dark btn-outline-dark d-md-block">' + newCity[i].city + '</button>';
+        cityButton += '<button id="' + newCity[i].city + '" class="btn btn-info my-1 p-1 text-dark btn-outline-dark d-md-block">' + newCity[i].city + '</button>';
         $("#city-list").append(cityButton);
     }
 }
